@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 51c61ca29ce57bb42881d57b23d3593e
+timeCreated: 1515781616
+licenseType: Pro
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - waveMaterial: {fileID: 2100000, guid: 09726743db8b6b040a50442399e778d6, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

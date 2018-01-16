@@ -1,0 +1,3 @@
+[submodule "Assets/InkPainter"]
+	path = Assets/InkPainter
+	url = git@github.com:EsProgram/InkPainter.git

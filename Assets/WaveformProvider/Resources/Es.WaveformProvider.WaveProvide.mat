@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WaveProvide
+  m_Name: Es.WaveformProvider.WaveProvide
   m_Shader: {fileID: 4800000, guid: 06e3011127bbe4f469fd2e0209805d64, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

@@ -9,7 +9,7 @@
 		_WaveInputTex("Wave Input Texture", 2D) = "black" {}
 		_RefTex("Ref",2D) = "black" {}
 		_BumpMap("Normalmap", 2D) = "bump" {}
-		_BumpAmt("BumpAmt", Range(0,9999)) = 0
+		_BumpAmt("BumpAmt", Range(0,100)) = 0
 		_WaveTex("Wave",2D) = "gray" {}
 		_ParallaxScale("Parallax Scale", Float) = 1
 		_NormalScaleFactor("Normal Scale Factor", Float) = 1

@@ -1,4 +1,4 @@
-﻿Shader "Ref"
+﻿Shader "WaterSurface"
 {
 	Properties
 	{

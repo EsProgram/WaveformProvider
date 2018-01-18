@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
+using Es.WaveformProvider;
 
 namespace Es.InkPainter.Sample
 {
 	[RequireComponent(typeof(Collider), typeof(MeshRenderer))]
 	public class CollisionWaveInput : MonoBehaviour
 	{
-		[SerializeField]
-		private Brush brush = null;
-
 		private void OnCollisionEnter(Collision collision)
 		{
 			WaveInput(collision);
@@ -22,9 +20,9 @@ namespace Es.InkPainter.Sample
 		{
 			foreach (var p in collision.contacts)
 			{
-				var canvas = p.otherCollider.GetComponent<InkCanvas>();
+				var canvas = p.otherCollider.GetComponent<WaveConductor>();
 				if (canvas != null)
-					canvas.Paint(brush, p.point);
+					canvas.Input(p.point, Random.Range(0.01f, 0.05f));
 			}
 		}
 	}

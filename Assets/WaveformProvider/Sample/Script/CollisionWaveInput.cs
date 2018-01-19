@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
-using Es.WaveformProvider;
 
-namespace Es.InkPainter.Sample
+namespace Es.WaveformProvider.Sample
 {
+	/// <summary>
+	/// Enter the waveform with a collision.
+	/// </summary>
 	[RequireComponent(typeof(Collider), typeof(MeshRenderer), typeof(Rigidbody))]
 	public class CollisionWaveInput : MonoBehaviour
 	{
-			[SerializeField]
-			float inputScaleFitter = 0.01f;
+		[SerializeField]
+		private Texture2D waveform;
 
-		Rigidbody rigidbody;
+		[SerializeField]
+		private float inputScaleFitter = 0.01f;
 
-		void Awake()
+		private new Rigidbody rigidbody;
+
+		private void Awake()
 		{
 			rigidbody = GetComponent<Rigidbody>();
 		}
@@ -32,7 +37,7 @@ namespace Es.InkPainter.Sample
 			{
 				var canvas = p.otherCollider.GetComponent<WaveConductor>();
 				if (canvas != null)
-					canvas.Input(p.point, rigidbody.velocity.magnitude * rigidbody.mass * inputScaleFitter);
+					canvas.Input(waveform, p.point, rigidbody.velocity.magnitude * rigidbody.mass * inputScaleFitter);
 			}
 		}
 	}

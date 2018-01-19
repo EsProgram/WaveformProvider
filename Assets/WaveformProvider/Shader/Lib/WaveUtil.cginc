@@ -2,8 +2,9 @@
 #define WAVE_UTIL
 
 #define WAVE_TEX_DEFINE(name) \
-    sampler2D name; \
-    float4 name##_TexelSize;
+	sampler2D name; \
+	float4 name##_ST; \
+	float4 name##_TexelSize;
 
 #define WAVE_HEIGHT(waveTex, uv) WaveHeight(waveTex, uv)
 #define WAVE_NORMAL(waveTex, uv) WaveNormal(waveTex, uv, waveTex##_TexelSize, 1, 1)

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Es.WaveformProvider
 {
 	/// <summary>
-	/// generates a waveform from input and outputs it as a texture.
+	/// Generates a waveform from input and outputs it as a texture.
 	/// </summary>
 	[RequireComponent(typeof(Renderer))]
 	[DisallowMultipleComponent]
@@ -15,21 +15,39 @@ namespace Es.WaveformProvider
 	{
 		#region Serialized field
 
+		/// <summary>
+		/// Waveforms are updated for each specified drawing process count.
+		/// </summary>
 		[Range(1, 10)]
 		public int updateFrameTiming = 3;
 
+		/// <summary>
+		/// To correct waveform input value.
+		/// </summary>
 		[Range(0f, 1f)]
 		public float adjuster = 0f;
 
+		/// <summary>
+		/// Distance factor on texture space to measure displacement.
+		/// </summary>
 		[Range(0.01f, 2f)]
 		public float stride = 1f;
 
+		/// <summary>
+		/// Adjusts the wave attenuation factor.
+		/// </summary>
 		[Range(0.1f, 0.98f)]
 		public float attenuation = 0.96f;
 
+		/// <summary>
+		/// Related to wave propagation speed.
+		/// </summary>
 		[Range(0.01f, 0.5f)]
 		public float propagationSpeed = 0.1f;
 
+		/// <summary>
+		/// Wave input texture size.
+		/// </summary>
 		[SerializeField]
 		private int inputTextureSize = 512;
 
@@ -93,13 +111,13 @@ namespace Es.WaveformProvider
 			#region create input brush
 
 			brush = new Brush(
-					brushTex: Texture2D.whiteTexture,//TODO:ブラシは丸いやつ
-					scale: 0.1f,//TODO:Scale変更できるように
+					brushTex: Texture2D.whiteTexture,
+					scale: 0.1f,
 					color: Color.white,
 					normalTex: null,
 					normalBlend: 0f,
-					heightTex: Texture2D.whiteTexture,//TODO:ブラシどうしよ。
-					heightBlend: 1f,//TODO:変更できたほうが良い？
+					heightTex: Texture2D.whiteTexture,
+					heightBlend: 1f,
 					colorBlending: Brush.ColorBlendType.UseBrush,
 					normalBlending: Brush.NormalBlendType.UseBrush,
 					heightBlending: Brush.HeightBlendType.Add
@@ -166,27 +184,63 @@ namespace Es.WaveformProvider
 
 		#region wave input method
 
-		public void Input(Vector2 uv, float scale)
+		/// <summary>
+		/// Make the input waveform.
+		/// </summary>
+		/// <param name="waveform">Waveform texture.</param>
+		/// <param name="uv">UV coordinate of texture.</param>
+		/// <param name="scale">waveform scale.(The ratio of the size in the texture)</param>
+		/// <param name="strength">Strength of input value.</param>
+		public void Input(Texture2D waveform, Vector2 uv, float scale, float strength = 0.1f)
 		{
+			brush.BrushTexture = waveform;
 			brush.Scale = scale;
+			brush.HeightBlend = strength;
 			inkCanvas.PaintUVDirect(brush, uv);
 		}
 
-		public void Input(Vector3 worldPos, float scale)
+		/// <summary>
+		/// Make the input waveform.
+		/// </summary>
+		/// <param name="waveform">Waveform texture.</param>
+		/// <param name="worldPos">World position.</param>
+		/// <param name="scale">Waveform scale.(The ratio of the size in the texture)</param>
+		/// <param name="strength">Strength of input value.</param>
+		public void Input(Texture2D waveform, Vector3 worldPos, float scale, float strength = 0.1f)
 		{
+			brush.BrushTexture = waveform;
 			brush.Scale = scale;
+			brush.HeightBlend = strength;
 			inkCanvas.Paint(brush, worldPos);
 		}
 
-		public void Input(RaycastHit hitInfo, float scale)
+		/// <summary>
+		/// Make the input waveform.
+		/// </summary>
+		/// <param name="waveform">Waveform texture.</param>
+		/// <param name="hitInfo">Raycast result.</param>
+		/// <param name="scale">Waveform scale.(The ratio of the size in the texture)</param>
+		/// <param name="strength">Strength of input value.</param>
+		public void Input(Texture2D waveform, RaycastHit hitInfo, float scale, float strength = 0.1f)
 		{
+			brush.BrushTexture = waveform;
 			brush.Scale = scale;
+			brush.HeightBlend = strength;
 			inkCanvas.Paint(brush, hitInfo);
 		}
 
-		public void InputNearestTriangleSurface(Vector3 worldPos, float scale)
+		/// <summary>
+		/// Make the input waveform.
+		/// </summary>
+		/// <param name="waveform">Waveform texture.</param>
+		/// <param name="worldPos">World position.</param>
+		/// <param name="scale">waveform scale.(The ratio of the size in the texture)</param>
+		/// <param name="strength">Strength of input value.</param>
+		public void InputNearestTriangleSurface(Texture2D waveform, Vector3 worldPos, float scale, float strength = 0.1f)
 		{
+			brush.BrushTexture = waveform;
 			brush.Scale = scale;
+			brush.HeightBlend = strength;
 			inkCanvas.PaintNearestTriangleSurface(brush, worldPos);
 		}
 

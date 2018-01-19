@@ -1,17 +1,16 @@
-﻿Shader "WaterSurface"
+﻿Shader "Es/WaveformProvider/Sample/WaterSurface"
 {
 	Properties
 	{
-		//TODO:入力用テクスチャを定義させる。マクロで定義するように。Inspectorでは表示しないほうが良さそう
-		//プロパティではマクロ使えねぇ・・・どうするか・・・
-		//InkCanvasで無理矢理描画できるようにするべきか？
 		[HideInInspector]
 		_WaveInputTex("Wave Input Texture", 2D) = "black" {}
 		_RefTex("Ref",2D) = "black" {}
 		_BumpMap("Normalmap", 2D) = "bump" {}
 		_BumpAmt("BumpAmt", Range(0,100)) = 0
+
 		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
+
 		_ParallaxScale("Parallax Scale", Float) = 1
 		_NormalScaleFactor("Normal Scale Factor", Float) = 1
 	}
@@ -24,7 +23,8 @@
 
 		CGINCLUDE
 		#include "UnityCG.cginc"
-		//
+
+		//include wave utility.
 		#include "Assets/WaveformProvider/Shader/Lib/WaveUtil.cginc"
 
 		struct appdata
@@ -51,6 +51,7 @@
 		float _BumpAmt;
 		float _ParallaxScale;
 		float _NormalScaleFactor;
+
 		//wave texture definition.
 		WAVE_TEX_DEFINE(_WaveTex)
 
@@ -66,11 +67,10 @@
 		fixed4 frag (v2f i) : SV_Target
 		{
 			float2 bump = UnpackNormal(tex2D( _BumpMap, i.uv + _Time.x / 2 )).rg;
+
 			//compute wave normal.
-			// bump += WAVE_NORMAL(_WaveTex, i.uv);
 			bump += WAVE_NORMAL_ADJ(_WaveTex, i.uv, _ParallaxScale, _NormalScaleFactor);
 
-			//(通常の法線マップ+波の法線)から、投影するテクスチャのオフセットを計算
 			float2 offset = bump * _BumpAmt - _BumpAmt * 0.5;
 			i.ref.xy = offset * i.ref.z + i.ref.xy;
 			float4 ref = tex2D(_RefTex, i.ref.xy / i.ref.w * 0.5 + 0.5);

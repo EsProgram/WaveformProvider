@@ -1,26 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[ExecuteInEditMode]
-public class AdjustReflectPosition : MonoBehaviour
+namespace Es.WaveformProvider.Sample
 {
-	[SerializeField]
-	private Transform target;
-
-	private void Update()
+	/// <summary>
+	/// Moves to the reflection position of the specified object.
+	/// </summary>
+	[ExecuteInEditMode]
+	public class AdjustReflectPosition : MonoBehaviour
 	{
-		if (target == null)
-			return;
+		[SerializeField]
+		private Transform target;
 
-		var pos = target.position;
-		var rotate = target.rotation.eulerAngles;
+		private void Update()
+		{
+			if (target == null)
+				return;
 
-		pos.y *= -1;
-		rotate.x *= -1;
-		rotate.z *= -1;
+			var pos = target.position;
+			var rotate = target.rotation.eulerAngles;
 
-		transform.position = pos;
-		transform.rotation = Quaternion.Euler(rotate);
+			pos.y *= -1;
+			rotate.x *= -1;
+			rotate.z *= -1;
+
+			transform.position = pos;
+			transform.rotation = Quaternion.Euler(rotate);
+		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿Shader "Wave"
+﻿Shader "Es/WaveformProvider/Wave"
 {
 	Properties
 	{

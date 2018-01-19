@@ -10,6 +10,7 @@
 		_RefTex("Ref",2D) = "black" {}
 		_BumpMap("Normalmap", 2D) = "bump" {}
 		_BumpAmt("BumpAmt", Range(0,100)) = 0
+		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
 		_ParallaxScale("Parallax Scale", Float) = 1
 		_NormalScaleFactor("Normal Scale Factor", Float) = 1
@@ -23,6 +24,8 @@
 
 		CGINCLUDE
 		#include "UnityCG.cginc"
+		//
+		#include "Assets/WaveformProvider/Shader/Lib/WaveUtil.cginc"
 
 		struct appdata
 		{
@@ -43,13 +46,13 @@
 		float4 _RefTex_TexelSize;
 		sampler2D _BumpMap;
 		float4 _BumpMap_ST;
-		sampler2D _WaveTex;
-		float4 _WaveTex_TexelSize;
 		float4x4 _RefW;
 		float4x4 _RefVP;
 		float _BumpAmt;
 		float _ParallaxScale;
 		float _NormalScaleFactor;
+		//wave texture definition.
+		WAVE_TEX_DEFINE(_WaveTex)
 
 		v2f vert (appdata v)
 		{
@@ -59,25 +62,13 @@
 			o.uv = TRANSFORM_TEX(v.uv, _BumpMap);
 			return o;
 		}
-		
+
 		fixed4 frag (v2f i) : SV_Target
 		{
-			//通常の法線マップからx,y方向の歪みを取得する
 			float2 bump = UnpackNormal(tex2D( _BumpMap, i.uv + _Time.x / 2 )).rg;
-
-			//波動方程式の解を_WaveTexで受け取り、波による歪み具合をbumpに加算
-			//_WaveTexは波の高さなので、高さの変化量から法線を求める
-			float2 shiftX = { _WaveTex_TexelSize.x,  0 };
-			float2 shiftZ = { 0, _WaveTex_TexelSize.y };
-			shiftX *= _ParallaxScale * _NormalScaleFactor;
-			shiftZ *= _ParallaxScale * _NormalScaleFactor;
-			float3 texX = 2 * tex2Dlod(_WaveTex, float4(i.uv.xy + shiftX,0,0)) - 1;
-			float3 texx = 2 * tex2Dlod(_WaveTex, float4(i.uv.xy - shiftX,0,0)) - 1;
-			float3 texZ = 2 * tex2Dlod(_WaveTex, float4(i.uv.xy + shiftZ,0,0)) - 1;
-			float3 texz = 2 * tex2Dlod(_WaveTex, float4(i.uv.xy - shiftZ,0,0)) - 1;
-			float3 du = { 1, 0, _NormalScaleFactor * (texX.x - texx.x) };
-			float3 dv = { 0, 1, _NormalScaleFactor * (texZ.x - texz.x) };
-			bump += normalize(cross(du, dv)) * 0.5 + 0.5;
+			//compute wave normal.
+			// bump += WAVE_NORMAL(_WaveTex, i.uv);
+			bump += WAVE_NORMAL_ADJ(_WaveTex, i.uv, _ParallaxScale, _NormalScaleFactor);
 
 			//(通常の法線マップ+波の法線)から、投影するテクスチャのオフセットを計算
 			float2 offset = bump * _BumpAmt - _BumpAmt * 0.5;

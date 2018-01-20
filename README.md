@@ -37,7 +37,7 @@ Provide a texture to simulate waves with Unity.
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=rpXeDkfSdwg">
-   <img src="http://img.youtube.com/vi/rpXeDkfSdwg/0.jpg" width="400"/>
+   <img src="http://img.youtube.com/vi/rpXeDkfSdwg/0.jpg" width="600"/>
   </a>
 </p>
 <p align="center">
@@ -47,19 +47,19 @@ Provide a texture to simulate waves with Unity.
 
 </br>
 <p align="center">
-   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/001.gif" width="400"/>
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/001.gif" width="600"/>
 </p>
 </br>
 
 </br>
 <p align="center">
-   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/003.gif" width="400"/>
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/003.gif" width="600"/>
 </p>
 </br>
 
 </br>
 <p align="center">
-   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/004.gif" width="400"/>
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/004.gif" width="600"/>
 </p>
 </br>
 

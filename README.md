@@ -67,7 +67,7 @@ Provide a texture to simulate waves with Unity.
 
 
 
-
+© UTJ/UCL
 
 
 ## How to use

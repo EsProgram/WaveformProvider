@@ -72,15 +72,59 @@ Provide a texture to simulate waves with Unity.
 
 ## How to use
 
-comming soon...
+### 1.Attach the WaveConductor component
 
+Attach a WaveConductor component that inputs and outputs waveforms to an object.
 
+</br>
+<p align="center">
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/setup001.png" width="600"/>
+</p>
+</br>
 
+### 2.A set of RenderTexture for waveform output
 
+Set RenderTexture to output waveform.
+In the image, it is set from the inspector view, but it can acquire and set it from the script.
 
+</br>
+<p align="center">
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/setup002.gif" width="600"/>
+</p>
+</br>
 
+### 3.Setting of materials using ripples.
 
+Create Shader that uses RenderTexture for waveform output set by Output of WaveConductor.And create a material using that shader and set it on the object.
+In the image, use the Material of normal output of waves.
 
+</br>
+<p align="center">
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/setup003.gif" width="600"/>
+</p>
+</br>
+
+### 4.Attach a script to input waveforms.
+
+Attach the script that inputs the waveform.
+In the image, attach a script that inputs the waveform with mouse input.
+
+</br>
+<p align="center">
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/setup004png.png" width="600"/>
+</p>
+</br>
+
+### 5.Move and adjust.
+
+Setup is complete.
+After that, adjust each parameter.
+
+</br>
+<p align="center">
+   <img src="https://github.com/EsProgram/WaveformProvider/blob/master/Image/setup005.gif" width="600"/>
+</p>
+</br>
 
 
 # The MIT License

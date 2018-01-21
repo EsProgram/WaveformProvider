@@ -72,6 +72,11 @@ Provide a texture to simulate waves with Unity.
 
 ## How to use
 
+For details on scripts and shader libraries, please see the <a href="https://github.com/EsProgram/WaveformProvider/wiki/WaveformProvider">wiki</a>.
+
+> https://github.com/EsProgram/WaveformProvider/wiki/WaveformProvider
+
+
 ### 1.Attach the WaveConductor component
 
 Attach a WaveConductor component that inputs and outputs waveforms to an object.

@@ -14,7 +14,8 @@
 		_ParallaxScale("Parallax Scale", Float) = 1
 		_NormalScaleFactor("Normal Scale Factor", Float) = 1
 	}
-	SubShader
+
+	Category
 	{
 		Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
 		ZWrite On
@@ -22,6 +23,7 @@
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		CGINCLUDE
+		#pragma fragment frag
 		#include "UnityCG.cginc"
 
 		//include wave utility.
@@ -55,15 +57,6 @@
 		//wave texture definition.
 		WAVE_TEX_DEFINE(_WaveTex)
 
-		v2f vert (appdata v)
-		{
-			v2f o;
-			o.vertex = UnityObjectToClipPos(v.vertex);
-			o.ref = mul(_RefVP, mul(_RefW, v.vertex));
-			o.uv = TRANSFORM_TEX(v.uv, _BumpMap);
-			return o;
-		}
-
 		fixed4 frag (v2f i) : SV_Target
 		{
 			float2 bump = UnpackNormal(tex2D( _BumpMap, i.uv + _Time.x / 2 )).rg;
@@ -81,12 +74,50 @@
 		}
 
 		ENDCG
+	}
 
+	SubShader
+	{
 		Pass
 		{
 			CGPROGRAM
+			#pragma target 3.0
 			#pragma vertex vert
-			#pragma fragment frag
+
+			v2f vert (appdata v)
+			{
+				v2f o;
+
+				//Move the vertex position up and down with the wave height.
+				v.vertex.y += WAVE_HEIGHT(_WaveTex, v.uv) * _ParallaxScale;
+
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.ref = mul(_RefVP, mul(_RefW, v.vertex));
+				o.uv = TRANSFORM_TEX(v.uv, _BumpMap);
+				return o;
+			}
+
+			ENDCG
+		}
+	}
+
+	SubShader
+	{
+		Pass
+		{
+			CGPROGRAM
+			#pragma target 2.0
+			#pragma vertex vert
+
+			v2f vert (appdata v)
+			{
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.ref = mul(_RefVP, mul(_RefW, v.vertex));
+				o.uv = TRANSFORM_TEX(v.uv, _BumpMap);
+				return o;
+			}
+
 			ENDCG
 		}
 	}

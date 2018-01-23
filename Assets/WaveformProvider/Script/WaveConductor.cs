@@ -16,6 +16,12 @@ namespace Es.WaveformProvider
 		#region Serialized field
 
 		/// <summary>
+		/// Whether to update the waveform.
+		/// </summary>
+		[SerializeField]
+		public bool update = true;
+
+		/// <summary>
 		/// Waveforms are updated for each specified drawing process count.
 		/// </summary>
 		[Range(1, 10)]
@@ -248,11 +254,20 @@ namespace Es.WaveformProvider
 
 		private void WaveUpdate()
 		{
+			#region Check whether to process
+
+			if(!update)
+				return;
+
 			if (Time.frameCount % updateFrameTiming != 0)
 				return;
 
 			if (input == null || output == null)
 				return;
+
+			#endregion Check whether to process
+
+			#region Set of data
 
 			WaveMaterial.SetFloat(ShaderPropertyAdjust, adjuster);
 			WaveMaterial.SetFloat(ShaderPropertyStride, stride);
@@ -261,6 +276,8 @@ namespace Es.WaveformProvider
 			WaveMaterial.SetTexture(ShaderPropertyInputTex, input);
 			WaveMaterial.SetTexture(ShaderPropertyPrevTex, prev);
 			WaveMaterial.SetTexture(ShaderPropertyPrev2Tex, prev2);
+
+			#endregion Set of data
 
 			Graphics.Blit(null, result, WaveMaterial);
 

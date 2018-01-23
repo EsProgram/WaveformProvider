@@ -15,10 +15,10 @@ namespace Es.WaveformProvider.Sample
 		[SerializeField]
 		private Texture2D waveform;
 
-		[SerializeField]
+		[SerializeField, Range(0f, 1f)]
 		private float inputScale = 0.05f;
 
-		[SerializeField]
+		[SerializeField, Range(0f, 1f)]
 		private float inputStrength = 0.1f;
 
 		[SerializeField]

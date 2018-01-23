@@ -42,7 +42,7 @@ namespace Es.WaveformProvider
 		/// <summary>
 		/// Adjusts the wave attenuation factor.
 		/// </summary>
-		[Range(0.1f, 0.98f)]
+		[Range(0.1f, 1f)]
 		public float attenuation = 0.96f;
 
 		/// <summary>
@@ -256,7 +256,7 @@ namespace Es.WaveformProvider
 		{
 			#region Check whether to process
 
-			if(!update)
+			if (!update)
 				return;
 
 			if (Time.frameCount % updateFrameTiming != 0)

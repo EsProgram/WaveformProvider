@@ -89,7 +89,7 @@
 				v2f o;
 
 				//Move the vertex position up and down with the wave height.
-				v.vertex.y += WAVE_HEIGHT(_WaveTex, v.uv) * _ParallaxScale;
+				v.vertex.y += WAVE_HEIGHT(_WaveTex, v.uv) * 0.4;
 
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.ref = mul(_RefVP, mul(_RefW, v.vertex));

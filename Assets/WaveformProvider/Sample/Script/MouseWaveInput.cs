@@ -13,6 +13,9 @@ namespace Es.WaveformProvider.Sample
 		[SerializeField, Range(0f, 1f)]
 		private float waveScale = 0.05f;
 
+		[SerializeField, Range(0f, 1f)]
+		private float strength = 0.1f;
+
 		private void Update()
 		{
 			if (Input.GetMouseButton(0))
@@ -23,7 +26,7 @@ namespace Es.WaveformProvider.Sample
 				{
 					var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
 					if (waveObject != null)
-						waveObject.Input(waveform, hitInfo, waveScale);
+						waveObject.Input(waveform, hitInfo, waveScale, strength);
 				}
 			}
 		}

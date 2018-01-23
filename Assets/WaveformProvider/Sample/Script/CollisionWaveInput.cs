@@ -11,8 +11,11 @@ namespace Es.WaveformProvider.Sample
 		[SerializeField]
 		private Texture2D waveform;
 
-		[SerializeField]
+		[SerializeField, Range(0f, 1f)]
 		private float inputScaleFitter = 0.01f;
+
+		[SerializeField, Range(0f, 1f)]
+		private float strength = 1f;
 
 		private new Rigidbody rigidbody;
 
@@ -37,7 +40,7 @@ namespace Es.WaveformProvider.Sample
 			{
 				var canvas = p.otherCollider.GetComponent<WaveConductor>();
 				if (canvas != null)
-					canvas.Input(waveform, p.point, rigidbody.velocity.magnitude * rigidbody.mass * inputScaleFitter);
+					canvas.Input(waveform, p.point, rigidbody.velocity.magnitude * rigidbody.mass * inputScaleFitter, strength);
 			}
 		}
 	}

@@ -11,6 +11,7 @@
 		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
 
+		_VertexDisplacementScale("Displacement Scale", Float) = 0.5
 		_ParallaxScale("Parallax Scale", Float) = 1
 		_NormalScaleFactor("Normal Scale Factor", Float) = 1
 	}
@@ -51,6 +52,7 @@
 		float4x4 _RefW;
 		float4x4 _RefVP;
 		float _BumpAmt;
+		float _VertexDisplacementScale;
 		float _ParallaxScale;
 		float _NormalScaleFactor;
 
@@ -89,7 +91,7 @@
 				v2f o;
 
 				//Move the vertex position up and down with the wave height.
-				v.vertex.y += WAVE_HEIGHT(_WaveTex, v.uv) * 0.4;
+				v.vertex.y += WAVE_HEIGHT(_WaveTex, v.uv) * _VertexDisplacementScale;
 
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.ref = mul(_RefVP, mul(_RefW, v.vertex));

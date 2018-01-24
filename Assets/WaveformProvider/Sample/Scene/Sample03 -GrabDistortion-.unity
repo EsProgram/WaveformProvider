@@ -297,11 +297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c61ca29ce57bb42881d57b23d3593e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  update: 1
   updateFrameTiming: 2
   adjuster: 0
   stride: 1
-  attenuation: 0.96
-  propagationSpeed: 0.3
+  attenuation: 0.95
+  propagationSpeed: 0.4
   inputTextureSize: 256
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
   debug: 0
@@ -319,7 +320,7 @@ MonoBehaviour:
   waitTime: 0.2
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   inputScale: 0.05
-  inputStrength: 0.1
+  inputStrength: 0.06
   targets:
   - {fileID: 616772279}
 --- !u!1 &798821755
@@ -680,3 +681,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   waveScale: 0.05
+  strength: 0.1

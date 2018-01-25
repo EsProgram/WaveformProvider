@@ -5,7 +5,7 @@ namespace Es.WaveformProvider.Sample
 	/// <summary>
 	/// Enter the waveform with a collision.
 	/// </summary>
-	[RequireComponent(typeof(Collider), typeof(MeshRenderer), typeof(Rigidbody))]
+	[RequireComponent(typeof(Collider), typeof(Rigidbody))]
 	public class CollisionWaveInput : MonoBehaviour
 	{
 		[SerializeField]

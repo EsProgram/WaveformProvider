@@ -8,13 +8,20 @@
 
 # WaveformProvider
 
-Provide a texture to simulate waves with Unity.
-
-<strong>Require InkPainter(nv1.2.1 or later).</strong>
+<strong>This asset requires InkPainter(nv1.2.1 or later).</strong>
 
 > InkPainter Download
 > * https://assetstore.unity.com/packages/tools/particles-effects/ink-painter-86210
 > * https://github.com/EsProgram/InkPainter/releases
+
+WaveProvider is a component and shader library for easily expressing waves with Unity.
+When you deal with waves with your own shader, its handling becomes very easy.
+
+For an overview of how to use, just attach the component that inputs and outputs the wave and pass the output to the shader.
+On Shader code uses a library to handle this output result easily.
+
+For detailed usage, please see the sample bundled and "How To Use" on this page.
+
 
 </br>
 <p align="center">

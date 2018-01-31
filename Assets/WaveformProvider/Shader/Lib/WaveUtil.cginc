@@ -31,7 +31,7 @@ float3 WaveNormal(sampler2D waveTex, float2 uv, float2 texelSize, float parallax
 	float3 texz = WAVE_HEIGHT(waveTex, uv.xy - shiftZ);
 	float3 du = { 1, 0, normalScale * (texX.x - texx.x) };
 	float3 dv = { 0, 1, normalScale * (texZ.x - texz.x) };
-	return normalize(cross(du, dv)) * 0.5 + 0.5;
+	return normalize(cross(du, dv));
 }
 
 #endif //WAVE_UTIL

@@ -38,6 +38,7 @@
 			};
 
 			sampler2D _BackgroundTexture;
+			float4 _BackgroundTexture_TexelSize;
 			float _NormalScale;
 			//wave texture definition.
 			WAVE_TEX_DEFINE(_WaveTex)
@@ -54,7 +55,7 @@
 			{
 				//compute wave normal.
 				float3 normal = WAVE_NORMAL(_WaveTex, i.uv);
-				float2 offset = normal.xy * _NormalScale - _NormalScale * 0.5;
+				float2 offset = normal.xy * _NormalScale - _BackgroundTexture_TexelSize.xy;
 				float4 bgcolor = tex2D(_BackgroundTexture, i.grabPos.xy / i.grabPos.w + offset);
 
 				return bgcolor;

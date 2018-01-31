@@ -44,7 +44,8 @@
 			float4 frag (v2f i) : SV_Target
 			{
 				//compute wave normal.
-				return float4(WAVE_NORMAL(_WaveTex, i.uv), 1);
+				float3 normal01 = WAVE_NORMAL(_WaveTex, i.uv) * 0.5 + 0.5;
+				return float4(normal01, 1);
 			}
 			ENDCG
 		}

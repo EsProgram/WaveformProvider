@@ -44,7 +44,8 @@
 			float4 frag (v2f i) : SV_Target
 			{
 				//compute wave height.
-				return float4(1, 1, 1, 1) * WAVE_HEIGHT(_WaveTex, i.uv);
+				float height01 = WAVE_HEIGHT(_WaveTex, i.uv) * 0.5 + 0.5;
+				return float4(height01, height01, height01, 1);
 			}
 			ENDCG
 		}

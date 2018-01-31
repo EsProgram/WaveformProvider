@@ -6,7 +6,7 @@
 		_WaveInputTex("Wave Input Texture", 2D) = "black" {}
 		_RefTex("Ref",2D) = "black" {}
 		_BumpMap("Normalmap", 2D) = "bump" {}
-		_BumpAmt("BumpAmt", Range(0,100)) = 0
+		_BumpAmt("BumpAmt", Range(0,10000)) = 0
 
 		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
@@ -66,7 +66,7 @@
 			//compute wave normal.
 			bump += WAVE_NORMAL_ADJ(_WaveTex, i.uv, _ParallaxScale, _NormalScaleFactor);
 
-			float2 offset = bump * _BumpAmt - _BumpAmt * 0.5;
+			float2 offset = bump * _BumpAmt * _RefTex_TexelSize.xy;
 			i.ref.xy = offset * i.ref.z + i.ref.xy;
 			float4 ref = tex2D(_RefTex, i.ref.xy / i.ref.w * 0.5 + 0.5);
 

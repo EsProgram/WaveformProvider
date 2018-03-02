@@ -158,6 +158,7 @@ namespace Es.WaveformProvider
 				var r8Init = new Texture2D(1, 1);
 				r8Init.SetPixel(0, 0, new Color(0.5f, 0, 0, 1));
 				r8Init.Apply();
+				Graphics.Blit(Texture2D.blackTexture, input);
 				Graphics.Blit(r8Init, prev);
 				Graphics.Blit(r8Init, prev2);
 			};

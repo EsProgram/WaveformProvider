@@ -19,7 +19,7 @@
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			
+
 			#include "UnityCG.cginc"
 
 			struct appdata
@@ -41,7 +41,7 @@
 				o.uv = v.uv;
 				return o;
 			}
-			
+
 			sampler2D _InputTex;
 			sampler2D _PrevTex;
 			float4 _PrevTex_TexelSize;
@@ -65,7 +65,7 @@
 						prev.r * 4) *
 					_C);
 				float4 input = tex2D(_InputTex, i.uv);
-				value += input.r;
+				value -= input.r;
 				value *= _Attenuation;
 				value = (value + 1) * 0.5;
 				value += _RoundAdjuster * 0.01;

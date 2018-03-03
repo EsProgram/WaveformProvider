@@ -36,7 +36,7 @@ namespace Es.WaveformProvider
 		/// <summary>
 		/// Distance factor on texture space to measure displacement.
 		/// </summary>
-		[Range(0.01f, 8f)]
+		[Range(0.01f, 20f)]
 		public float stride = 1f;
 
 		/// <summary>

@@ -36,7 +36,7 @@ namespace Es.WaveformProvider
 		/// <summary>
 		/// Distance factor on texture space to measure displacement.
 		/// </summary>
-		[Range(0.01f, 2f)]
+		[Range(0.01f, 20f)]
 		public float stride = 1f;
 
 		/// <summary>
@@ -75,6 +75,7 @@ namespace Es.WaveformProvider
 		private RenderTexture result;
 		private InkCanvas inkCanvas;
 		private Brush brush;
+		private bool renderedThisFrame;
 
 		private readonly int ShaderPropertyAdjust = Shader.PropertyToID("_RoundAdjuster");
 		private readonly int ShaderPropertyStride = Shader.PropertyToID("_Stride");
@@ -158,11 +159,20 @@ namespace Es.WaveformProvider
 				var r8Init = new Texture2D(1, 1);
 				r8Init.SetPixel(0, 0, new Color(0.5f, 0, 0, 1));
 				r8Init.Apply();
+				Graphics.Blit(Texture2D.blackTexture, input);
 				Graphics.Blit(r8Init, prev);
 				Graphics.Blit(r8Init, prev2);
 			};
 
 			#endregion Initialize texture
+		}
+
+		/// <summary>
+		/// Update is called every frame, if the MonoBehaviour is enabled.
+		/// </summary>
+		void Update()
+		{
+			renderedThisFrame = false;
 		}
 
 		private void OnWillRenderObject()
@@ -259,6 +269,9 @@ namespace Es.WaveformProvider
 			if (!update)
 				return;
 
+			if(renderedThisFrame)
+				return;
+
 			if (Time.frameCount % updateFrameTiming != 0)
 				return;
 
@@ -288,6 +301,8 @@ namespace Es.WaveformProvider
 
 			Graphics.Blit(init, input);
 			Graphics.Blit(prev, output);
+
+			renderedThisFrame = true;
 		}
 	}
 }
